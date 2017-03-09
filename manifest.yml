@@ -1,0 +1,11 @@
+applications:
+- path: .
+  memory: 128M
+  instances: 1
+  domain: mybluemix.net
+  name: GUI-nlu-pyflask
+  host: GUI-nlu-pyflask
+  disk_quota: 1024M
+  services:
+  - GUI-python-flask-NLU-service
+  buildpack: python_buildpack
