@@ -29,7 +29,7 @@ import watson_developer_cloud
 import watson_developer_cloud.natural_language_understanding.features.v1 as \
 features
 
-app = Flask("NLU_Application)
+app = Flask("NLU_Application")
 # In[3]:
 # new code from https://github.com/watson-developer-cloud/python-sdk/blob/master/examples/natural_language_understanding_v1.py	    
 nlu = watson_developer_cloud.NaturalLanguageUnderstandingV1(
