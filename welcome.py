@@ -27,17 +27,17 @@ from flask import jsonify
 sys.path.append(os.path.join(os.getcwd(),'..'))
 import watson_developer_cloud
 import watson_developer_cloud.natural_language_understanding.features.v1 as \
-features
+       features
 
 app = Flask("NLU Application")
-# In[3]:
+
 # new code from https://github.com/watson-developer-cloud/python-sdk/blob/master/examples/natural_language_understanding_v1.py	    
 nlu = watson_developer_cloud.NaturalLanguageUnderstandingV1(
        version='2017-02-27',
-     	username='YOUR SERVICE USERNAME',
-     	password='YOUR SERVICE PASSWORD')
+       username=os.getenv('NATURAL_LANGUAGE_UNDERSTANDING_USERNAME'),
+       password=os.getenv('NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD'))
 
-@app.route('/')
+@app.route("/")
 # new function	    
  def eval_default():
        	response = nlu.analyze(
