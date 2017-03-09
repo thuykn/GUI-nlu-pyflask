@@ -38,13 +38,12 @@ nlu = watson_developer_cloud.NaturalLanguageUnderstandingV1(
        password=os.getenv('NATURAL_LANGUAGE_UNDERSTANDING_PASSWORD'))
 
 @app.route("/")
-# new function	    
- def eval_default():
-       	response = nlu.analyze(
- 		text='Bruce Banner is the Hulk and Bruce Wayne is BATMAN! '
-               	'Superman fears not Banner, but Wayne.',
+def eval_default():
+        response = nlu.analyze(
+                text='Bruce Banner is the Hulk and Bruce Wayne is BATMAN! '
+                'Superman fears not Banner, but Wayne.',
                 features=[features.Entities(), features.Keywords()])
-       	return jsonify(response)
+        return jsonify(response)
 
 #port = os.getenv('PORT', '5000')
 if __name__ == "__main__":
