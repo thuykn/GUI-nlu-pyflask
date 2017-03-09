@@ -12,34 +12,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-from flask import Flask, jsonify
+# In[4]:
 
-app = Flask(__name__)
+# new import
+import sys
+import os
+import json
+from flask import Flask
+
+# new import
+from flask import jsonify
+
+sys.path.append(os.path.join(os.getcwd(),'..'))
+import watson_developer_cloud
+import watson_developer_cloud.natural_language_understanding.features.v1 as \
+features
+
+app = Flask("NLU_Application)
+# In[3]:
+nlu = watson_developer_cloud.NaturalLanguageUnderstandingV1(
+    version='2017-02-27',
+     username='YOUR SERVICE USERNAME',
+     password='YOUR SERVICE PASSWORD')
 
 @app.route('/')
-def Welcome():
-    return app.send_static_file('index.html')
+ def eval_default():
+        response = nlu.analyze(
+                text='Bruce Banner is the Hulk and Bruce Wayne is BATMAN! '
+                'Superman fears not Banner, but Wayne.',
+                features=[features.Entities(), features.Keywords()])
+       return jsonify(response)
 
-@app.route('/myapp')
-def WelcomeToMyapp():
-    return 'Welcome again to my app running on Bluemix!'
-
-@app.route('/api/people')
-def GetPeople():
-    list = [
-        {'name': 'John', 'age': 28},
-        {'name': 'Bill', 'val': 26}
-    ]
-    return jsonify(results=list)
-
-@app.route('/api/people/<name>')
-def SayHello(name):
-    message = {
-        'message': 'Hello ' + name
-    }
-    return jsonify(results=message)
-
-port = os.getenv('PORT', '5000')
+#port = os.getenv('PORT', '5000')
 if __name__ == "__main__":
-	app.run(host='0.0.0.0', port=int(port))
+	#app.run(host='0.0.0.0', port=int(port))
+app.run(host='0.0.0.0',debug=True,port=int(os.getenv('PORT',8080)))
